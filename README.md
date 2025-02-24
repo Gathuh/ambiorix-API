@@ -51,7 +51,7 @@ install.packages(c("ambiorix", "data.table", "jsonlite", "DBI", "RSQLite", "nycf
 - **Headers**: `Content-Type: application/json`
 - **Body**: JSON with flight details (e.g., `year`, `carrier`, `origin`, `dest`).
 - **Example**:
-   ![POST Request](Screenshot from 2025-02-24 03-30-09.png)
+   ![POST Request](/assets/Screenshot from 2025-02-24 03-30-09.png)
    
 - **Response**: `{"message": "Flight added", "flight_id": [new_id]}` (200 OK)
 - **Errors**: 
