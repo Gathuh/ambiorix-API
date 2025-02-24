@@ -1,5 +1,3 @@
-
-
 # Flights API
 
 Welcome to the Flights API, a lightweight RESTful service built with R and Ambiorix to manage and query flight data. This API allows you to create, retrieve, update, and delete flight entries, check delay status, calculate average departure delays, and find top destinations—all powered by SQLite for persistent storage. Crafted with cosmic curiosity, this project aims to make flight data exploration both fun and functional.
@@ -51,68 +49,62 @@ install.packages(c("ambiorix", "data.table", "jsonlite", "DBI", "RSQLite", "nycf
 - **Headers**: `Content-Type: application/json`
 - **Body**: JSON with flight details (e.g., `year`, `carrier`, `origin`, `dest`).
 - **Example**:
-   ![POST Request](/assets/Screenshot from 2025-02-24 03-30-09.png)
-   
+  ![POST Request](https://raw.githubusercontent.com/Gathuh/ambiorix-API/main/assets/Screenshot%20from%202025-02-24%2003-30-09.png)
+
 - **Response**: `{"message": "Flight added", "flight_id": [new_id]}` (200 OK)
-- **Errors**: 
+- **Errors**:  
   - 400: `{"error": "Empty payload"}`, `{"error": "Invalid JSON"}`
 
 ### **GET /flight/:id**  
 - **Description**: Returns details of a flight by ID.
 - **Example**: `GET /flight/4`
-- **Response**: JSON object with flight details (200 OK)
-   ![GET Request flight id](Screenshot from 2025-02-24 03-32-05.png)
+- **Response**: JSON object with flight details (200 OK)  
+  ![GET Request flight id](https://raw.githubusercontent.com/Gathuh/ambiorix-API/main/assets/Screenshot%20from%202025-02-24%2003-32-05.png)
 
 ### **GET /check-delay/:id**  
 - **Description**: Returns whether a flight is delayed.
 - **Example**: `GET /check-delay/90`
-- **Response**: `{"delayed": 0}` (200 OK)
-   ![GET Request check delay](Screenshot from 2025-02-24 03-32-40.png)
+- **Response**: `{"delayed": 0}` (200 OK)  
+  ![GET Request check delay](https://raw.githubusercontent.com/Gathuh/ambiorix-API/main/assets/Screenshot%20from%202025-02-24%2003-32-40.png)
 
 ### **GET /avg-dep-delay?id=[airline]**  
 - **Description**: Returns average departure delay for an airline or all airlines if no `id` is provided.
-- **Examples**: 
+- **Examples**:  
   - `GET /avg-dep-delay?id=AA`
   - `GET /avg-dep-delay`
-- **Response**: 
+- **Response**:  
   - Single airline: `{"carrier": "AA", "avg_delay": 8.586}` (200 OK)
   - All airlines: `{"carrier": ["AA", "AS", ...], "avg_delay": [8.586, 5.804, ...]}` (200 OK)
-- **Errors**: 
+- **Errors**:  
   - 400: `{"error": "Invalid airline code: must be non-empty alphanumeric"}`
   - 404: `{"error": "Airline 'ZZ' not found"}` or `{"error": "No flight data available"}`
-  - 500: `{"error": "Database error: [message]"}`
-     ![GET Request check AVG delay](Screenshot from 2025-02-24 03-32-53.png)
+  - 500: `{"error": "Database error: [message]"}`  
+  ![GET Request check AVG delay](https://raw.githubusercontent.com/Gathuh/ambiorix-API/main/assets/Screenshot%20from%202025-02-24%2003-32-53.png)
 
 ### **GET /top-destinations/:n**  
 - **Description**: Returns the top `n` destinations by flight count.
 - **Example**: `GET /top-destinations/3`
 - **Response**: `{"dest": ["ORD", "ATL", "LAX"], "count": [17283, 17215, 16174]}` (200 OK)
-- **Errors**: 400: `{"error": "Invalid number"}`
-     ![GET Request Top n flights](Screenshot from 2025-02-24 03-31-41.png)
+- **Errors**: 400: `{"error": "Invalid number"}`  
+  ![GET Request Top n flights](https://raw.githubusercontent.com/Gathuh/ambiorix-API/main/assets/Screenshot%20from%202025-02-24%2003-31-41.png)
+
 ### **PUT /flights/:id**  
 - **Description**: Updates a flight’s details.
 - **Headers**: `Content-Type: application/json`
 - **Body**: JSON with updated fields (e.g., `{"dep_delay": 30, "delayed": 1}`).
 - **Example**: `PUT /flights/2`
 - **Response**: `{"message": "Flight updated"}` (200 OK)
-- **Errors**: 
+- **Errors**:  
   - 400: `{"error": "Empty payload"}`, `{"error": "Invalid JSON"}`
-  - 404: `{"error": "Flight not found"}`
- ![PUT Request](Screenshot from 2025-02-24 03-31-06.png)
+  - 404: `{"error": "Flight not found"}`  
+  ![PUT Request](https://raw.githubusercontent.com/Gathuh/ambiorix-API/main/assets/Screenshot%20from%202025-02-24%2003-31-06.png)
+
 ### **DELETE /:id**  
 - **Description**: Deletes a flight by ID.
 - **Example**: `DELETE /2`
 - **Response**: `{"message": "Flight deleted"}` (200 OK)
-- **Errors**: 404: `{"error": "Flight not found"}`
- ![DELETE Request](Screenshot from 2025-02-24 03-30-43.png)
-## Testing with Postman
-1. **Start the Server**: Run the script in R.
-2. **Open Postman**:
-   - Create a collection (e.g., "Flights API").
-   - Add requests for each endpoint with the specified method, URL, headers, and body.
-3. **Test Cases**:
-   - Use the examples above.
-   - Test error cases (e.g., invalid IDs, empty payloads) to verify error handling.
+- **Errors**: 404: `{"error": "Flight not found"}`  
+  ![DELETE Request](https://raw.githubusercontent.com/Gathuh/ambiorix-API/main/assets/Screenshot%20from%202025-02-24%2003-30-43.png)
 
 ## License
 
@@ -121,32 +113,8 @@ This project is licensed under the MIT License - see below for details.
 ```
 MIT License
 
-Copyright (c) 2025 [Your Name or Organization]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction...
 ```
 
----
-
-### Notes
 Coded with boundless wonder!
-- **License**: MIT is included at the bottom, keeping it open and permissive.
-- **Your Name**: Replace `[Your Name or Organization]` in the license with your actual name or entity.
-
 
