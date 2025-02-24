@@ -1,0 +1,21 @@
+
+# Database files (except flights.sqlite)
+*.db
+flights2.sqlite
+
+# Generated files
+*.csv
+*.zip
+
+# R-specific
+*.Rproj
+.Rhistory
+.RData
+
+# Unnecessary directories/files
+R/
+inst/
+app.R
+DESCRIPTION
+NAMESPACE
+flights.sqlite
